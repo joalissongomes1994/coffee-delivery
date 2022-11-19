@@ -17,9 +17,26 @@ export const HeaderContainer = styled.header<HeaderContainerProps>`
     gap: 0.75rem;
   }
 
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .button-go-back {
+      font-size: 1.6rem;
+      color: ${(props) => props.theme.color['base-label']};
+    }
+  }
+
   @media (max-width: 70.5rem) {
     padding-right: ${(props) => (props.hasItem ? `0.5rem` : 0)};
   }
+`
+
+export const BackButton = styled.button`
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
 `
 
 const BaseButtonHeader = styled.button`
@@ -29,8 +46,6 @@ const BaseButtonHeader = styled.button`
 `
 
 export const LocationContainer = styled(BaseButtonHeader)`
-  padding: 0.5rem;
-  border-radius: 6px;
   background-color: ${(props) => props.theme.color['purple-light']};
 
   svg {
@@ -38,12 +53,12 @@ export const LocationContainer = styled(BaseButtonHeader)`
   }
 `
 
-export const CartContainer = styled(BaseButtonHeader)`
+export const CartButton = styled(BaseButtonHeader)`
   background-color: ${(props) => props.theme.color['yellow-light']};
   cursor: pointer;
   position: relative;
 
-  .cart-items-amount {
+  span {
     position: absolute;
     height: 1.25rem;
     width: 1.25rem;

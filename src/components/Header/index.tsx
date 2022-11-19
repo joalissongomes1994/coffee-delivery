@@ -4,7 +4,7 @@ import { MapPin, ShoppingCart } from 'phosphor-react'
 
 export function Header() {
   return (
-    <HeaderContainer>
+    <HeaderContainer hasItem>
       <img src={logoCoffeeDelivery} alt="" />
 
       <div className="cards-header-area">

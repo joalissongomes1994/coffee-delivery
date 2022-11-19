@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-export const HeaderContainer = styled.header`
+interface HeaderContainerProps {
+  hasItem: boolean
+}
+
+export const HeaderContainer = styled.header<HeaderContainerProps>`
   height: 6.5rem;
 
   display: flex;
@@ -11,6 +15,10 @@ export const HeaderContainer = styled.header`
     display: flex;
     align-items: center;
     gap: 0.75rem;
+  }
+
+  @media (max-width: 70.5rem) {
+    padding-right: ${(props) => (props.hasItem ? `0.5rem` : 0)};
   }
 `
 

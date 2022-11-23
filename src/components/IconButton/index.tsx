@@ -18,6 +18,7 @@ export interface IconButtonProps
   selectedColor: TypeColors
   buttonText: string
   selected?: boolean
+  size?: 'small' | 'large'
 }
 
 type Ref =

@@ -1,8 +1,15 @@
-import { ReactNode } from 'react'
+import {
+  ReactNode,
+  FC,
+  ButtonHTMLAttributes,
+  forwardRef,
+  RefObject,
+} from 'react'
 import { TypeColors } from '../../@types/colors'
 import { IconButtonContainer } from './styles'
 
-export interface IconButtonProps {
+export interface IconButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   iconButton: ReactNode
   iconColor: TypeColors
   backgroundColor: TypeColors
@@ -11,20 +18,23 @@ export interface IconButtonProps {
   selectedColor: TypeColors
   buttonText: string
   selected?: boolean
-  size?: 'small' | 'large'
 }
 
-export function IconButton({
-  selected = false,
-  buttonText,
-  iconButton,
-  ...props
-}: IconButtonProps) {
+type Ref =
+  | ((instance: HTMLButtonElement | null) => void)
+  | RefObject<HTMLButtonElement>
+  | null
+  | undefined
+
+export const IconButton: FC<IconButtonProps> = forwardRef(function IconButton(
+  { selected = false, buttonText, iconButton, ...props },
+  ref: Ref,
+) {
   return (
-    <IconButtonContainer type="button" selected={selected} {...props}>
+    <IconButtonContainer ref={ref} type="button" selected={selected} {...props}>
       {iconButton}
 
       <span>{String(buttonText).toUpperCase()}</span>
     </IconButtonContainer>
   )
-}
+})

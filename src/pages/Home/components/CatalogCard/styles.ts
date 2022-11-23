@@ -69,39 +69,6 @@ export const Price = styled.span`
   line-height: 1.6;
 `
 
-export const CounterConainter = styled.div`
-  display: flex;
-  align-items: center;
-  background-color: aqua;
-  height: 2.375rem;
-  border-radius: 6px;
-  gap: 4px;
-  padding: 0.5rem;
-  background-color: ${(props) => props.theme.color['base-button']};
-
-  span {
-    font-size: 1rem;
-    line-height: 1.6;
-    font-weight: 400;
-    color: ${(props) => props.theme.color['base-title']};
-  }
-
-  button {
-    border: 0;
-    background-color: transparent;
-    color: ${(props) => props.theme.color.purple};
-    font-size: 0.875rem;
-    font-weight: 700;
-    cursor: pointer;
-
-    transition: color 0.2s;
-
-    &:hover {
-      color: ${(props) => props.theme.color['purple-dark']};
-    }
-  }
-`
-
 export const ButtonCart = styled.button`
   width: 2.375rem;
   height: 2.375rem;

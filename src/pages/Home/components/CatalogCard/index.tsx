@@ -1,7 +1,6 @@
 import {
   ButtonCart,
   CatalogCardContainer,
-  CounterConainter,
   Description,
   FooterCard,
   LabelContainer,
@@ -13,6 +12,7 @@ import { formatPrice } from '../../../../util/format'
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { TCoffeeListData } from '../../../../coffeeList'
 import { useNavigate } from 'react-router-dom'
+import { CounterButton } from '../../../../components/CounterButton'
 
 interface CatalogCardProps {
   data: TCoffeeListData
@@ -42,15 +42,12 @@ export function CatalogCard({ data }: CatalogCardProps) {
         <Price>{formatPrice(data.price)}</Price>
 
         <div>
-          <CounterConainter>
-            <button>
-              <Plus weight="bold" />
-            </button>
-            <span>1</span>
-            <button>
-              <Minus weight="bold" />
-            </button>
-          </CounterConainter>
+          <CounterButton
+            countItem={4}
+            iconInputMinus={<Minus weight="bold" />}
+            iconInputPlus={<Plus weight="bold" />}
+            size="large"
+          />
 
           <ButtonCart type="button" onClick={handleNavigationToCheckout}>
             <ShoppingCart weight="fill" />

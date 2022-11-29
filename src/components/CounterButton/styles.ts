@@ -1,7 +1,10 @@
 import styled from 'styled-components'
 import { CounterButtonProps } from '.'
 
-type CounterContainerProps = Omit<CounterButtonProps, 'countItem'>
+type CounterContainerProps = Omit<
+  CounterButtonProps,
+  'coffeeId' | 'countItem' | 'itemIncrement' | 'itemDecrement'
+>
 
 export const CounterContainer = styled.div<CounterContainerProps>`
   display: flex;
@@ -36,8 +39,12 @@ export const CounterContainer = styled.div<CounterContainerProps>`
 
     transition: color 0.2s;
 
-    &:hover {
+    &:not(:disabled):hover {
       color: ${(props) => props.theme.color['purple-dark']};
+    }
+
+    &:disabled {
+      cursor: not-allowed;
     }
   }
 `

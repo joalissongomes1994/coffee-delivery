@@ -11,45 +11,58 @@ import {
 import { formatPrice } from '../../../../util/format'
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { TCoffeeListData } from '../../../../coffeeList'
-import { useNavigate } from 'react-router-dom'
+import { useContext, useState } from 'react'
+import { CoffeeContext } from '../../../../contexts/CoffeeContext'
 import { CounterButton } from '../../../../components/CounterButton'
 
 interface CatalogCardProps {
-  data: TCoffeeListData
+  coffee: TCoffeeListData
 }
 
-export function CatalogCard({ data }: CatalogCardProps) {
-  const navigate = useNavigate()
+export function CatalogCard({ coffee }: CatalogCardProps) {
+  const { addCoffee } = useContext(CoffeeContext)
 
-  function handleNavigationToCheckout() {
-    navigate('/checkout')
+  const [coffeeAmount, setCoffeeAmount] = useState(1)
+
+  function handleAddCoffee(coffee: TCoffeeListData) {
+    addCoffee(coffee, coffeeAmount)
+  }
+
+  function handleCoffeesAmountIncrement() {
+    setCoffeeAmount((state) => state + 1)
+  }
+
+  function handleCoffeesAmountDecrement() {
+    setCoffeeAmount((state) => state - 1)
   }
 
   return (
     <CatalogCardContainer>
-      <img src={data.image} alt={data.title} title={data.title} />
+      <img src={coffee.image} alt={coffee.title} title={coffee.title} />
 
       <LabelContainer>
-        {data.labels.map((label) => (
+        {coffee.labels.map((label) => (
           <label key={label.name}>{String(label.name).toUpperCase()}</label>
         ))}
       </LabelContainer>
 
-      <Title>{data.title}</Title>
-      <Description>{data.description}</Description>
+      <Title>{coffee.title}</Title>
+      <Description>{coffee.description}</Description>
 
       <FooterCard>
-        <Price>{formatPrice(data.price)}</Price>
+        <Price>{formatPrice(coffee.price)}</Price>
 
         <div>
           <CounterButton
-            countItem={4}
+            countItem={coffeeAmount}
             iconInputMinus={<Minus weight="bold" />}
             iconInputPlus={<Plus weight="bold" />}
             size="large"
+            itemIncrement={handleCoffeesAmountIncrement}
+            itemDecrement={handleCoffeesAmountDecrement}
           />
 
-          <ButtonCart type="button" onClick={handleNavigationToCheckout}>
+          <ButtonCart type="button" onClick={() => handleAddCoffee(coffee)}>
             <ShoppingCart weight="fill" />
           </ButtonCart>
         </div>

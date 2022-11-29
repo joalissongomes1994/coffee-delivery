@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 
 export const CatalogCardContainer = styled.article`
-  max-width: 16rem;
+  max-width: 17.25rem;
   background-color: ${(props) => props.theme.color['base-card']};
   border-radius: 6px 44px;
   padding: 1.25rem;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   img {

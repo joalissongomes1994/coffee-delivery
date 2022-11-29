@@ -1,12 +1,7 @@
-import {
-  BackButton,
-  CartButton,
-  HeaderContainer,
-  LocationContainer,
-} from './styles'
+import { CartButton, HeaderContainer, LocationContainer } from './styles'
 import logoCoffeeDelivery from '../../assets/coffee-delivery-logo.svg'
-import { CaretLeft, MapPin, ShoppingCart } from 'phosphor-react'
-import { useNavigate } from 'react-router-dom'
+import { MapPin, ShoppingCart } from 'phosphor-react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { CoffeeContext } from '../../contexts/CoffeeContext'
 
@@ -15,29 +10,17 @@ export function Header() {
   const coffeeSize = coffees.length
 
   const navigate = useNavigate()
-  const isPathHome = window.location.pathname === '/'
 
   function handleNavigationToCheckout() {
     if (window.location.pathname !== '/checkout') navigate('/checkout')
   }
 
-  function handleNavigationToGoBack() {
-    navigate(-1)
-  }
-
   return (
     <HeaderContainer hasItem>
       <div>
-        {!isPathHome && (
-          <BackButton
-            title="voltar"
-            type="button"
-            onClick={handleNavigationToGoBack}
-          >
-            <CaretLeft weight="light" className="button-go-back" />
-          </BackButton>
-        )}
-        <img src={logoCoffeeDelivery} alt="" />
+        <Link to="/">
+          <img src={logoCoffeeDelivery} alt="" />
+        </Link>
       </div>
 
       <div className="cards-header-area">

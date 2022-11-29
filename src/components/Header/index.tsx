@@ -7,8 +7,13 @@ import {
 import logoCoffeeDelivery from '../../assets/coffee-delivery-logo.svg'
 import { CaretLeft, MapPin, ShoppingCart } from 'phosphor-react'
 import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { CoffeeContext } from '../../contexts/CoffeeContext'
 
 export function Header() {
+  const { coffees } = useContext(CoffeeContext)
+  const coffeeSize = coffees.length
+
   const navigate = useNavigate()
   const isPathHome = window.location.pathname === '/'
 
@@ -40,9 +45,13 @@ export function Header() {
           <MapPin weight="fill" size={22} /> Coruripe, AL
         </LocationContainer>
 
-        <CartButton type="button" onClick={handleNavigationToCheckout}>
+        <CartButton
+          type="button"
+          disabled={coffeeSize === 0}
+          onClick={handleNavigationToCheckout}
+        >
           <ShoppingCart weight="fill" size={22} />
-          <span>3</span>
+          {coffeeSize > 0 && <span>{coffeeSize}</span>}
         </CartButton>
       </div>
     </HeaderContainer>

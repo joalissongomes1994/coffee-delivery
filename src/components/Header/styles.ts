@@ -77,4 +77,8 @@ export const CartButton = styled(BaseButtonHeader)`
   svg {
     color: ${(props) => props.theme.color['yellow-dark']};
   }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 `

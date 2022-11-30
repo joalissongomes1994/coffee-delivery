@@ -11,7 +11,7 @@ import {
 import { formatPrice } from '../../../../util/format'
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { TCoffeeListData } from '../../../../coffeeList'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CoffeeContext } from '../../../../contexts/CoffeeContext'
 import { CounterButton } from '../../../../components/CounterButton'
 
@@ -20,20 +20,39 @@ interface CatalogCardProps {
 }
 
 export function CatalogCard({ coffee }: CatalogCardProps) {
-  const { addCoffee } = useContext(CoffeeContext)
+  const { addCoffee, coffees, coffeesAmountIncrement, coffeesAmountDecrement } =
+    useContext(CoffeeContext)
 
-  const [coffeeAmount, setCoffeeAmount] = useState(1)
+  const coffeeSelected = coffees.findIndex((item) => item.id === coffee.id)
+
+  const [coffeeAmount, setCoffeeAmount] = useState<number>(() => {
+    if (coffeeSelected < 0) return 1
+
+    return coffees[coffeeSelected].amount
+  })
+
+  useEffect(() => {
+    setCoffeeAmount((state) => {
+      if (coffeeSelected < 0) return state
+
+      return coffees[coffeeSelected].amount
+    })
+  }, [coffeeSelected, coffees])
 
   function handleAddCoffee(coffee: TCoffeeListData) {
     addCoffee(coffee, coffeeAmount)
   }
 
   function handleCoffeesAmountIncrement() {
-    setCoffeeAmount((state) => state + 1)
+    if (coffeeSelected < 0) return setCoffeeAmount((state) => state + 1)
+
+    coffeesAmountIncrement(coffee.id, coffeeAmount)
   }
 
   function handleCoffeesAmountDecrement() {
-    setCoffeeAmount((state) => state - 1)
+    if (coffeeSelected < 0) return setCoffeeAmount((state) => state - 1)
+
+    coffeesAmountDecrement(coffee.id, coffeeAmount)
   }
 
   return (

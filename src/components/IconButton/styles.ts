@@ -10,10 +10,9 @@ export const IconButtonContainer = styled.button<IconButtonContainerProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 1rem;
+  padding: 0.8rem;
   gap: 0.65rem;
   height: 3.19rem;
-  background: #e6e5e5;
   border-radius: 6px;
   border: ${(props) =>
     props.selected ? `1px solid ${props.theme.color[props.iconColor]}` : 0};
@@ -33,6 +32,10 @@ export const IconButtonContainer = styled.button<IconButtonContainerProps>`
     font-size: 1.375rem;
     line-height: 1.3;
     color: ${(props) => props.theme.color[props.iconColor]};
+  }
+
+  span {
+    width: 100%;
   }
 
   &:hover {

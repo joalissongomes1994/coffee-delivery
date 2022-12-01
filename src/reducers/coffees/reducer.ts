@@ -6,7 +6,7 @@ interface CoffeesState {
   coffeeId: string | null
 }
 
-export function coffeesReducer(state: CoffeesState, action: any) {
+export function coffeesReducer(state: CoffeesState, action: any): CoffeesState {
   switch (action.type) {
     case ActionTypes.ADD_COFFEE: {
       const hasThisCoffee = state.coffees.findIndex(

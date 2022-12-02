@@ -65,8 +65,6 @@ export function AddressCard() {
       .then((res) => {
         const { data } = res
 
-        console.log(data)
-
         setValue('address.city', data.localidade)
         setValue('address.district', data.bairro)
         setValue('address.federativeUnit', data.uf)

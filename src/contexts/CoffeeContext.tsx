@@ -44,8 +44,6 @@ export function CoffeeContextProvider({
 
   const { coffeeId, coffees } = coffeeState
 
-  console.log(coffees)
-
   useEffect(() => {
     const stateCheckoutJSON = JSON.stringify(coffeeState)
 

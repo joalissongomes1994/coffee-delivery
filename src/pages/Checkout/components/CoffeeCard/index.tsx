@@ -1,16 +1,24 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { CoffeeContext } from '../../../../contexts/CoffeeContext'
 import { formatPrice } from '../../../../util/format'
 import { CoffeeSelected } from '../CoffeeSelected'
 import { Button, Card, Container, Subtitle, TotalAmount } from './styles'
+import { useNavigate } from 'react-router-dom'
 
 export function CoffeeCard() {
+  const navigate = useNavigate()
   const { coffees } = useContext(CoffeeContext)
   const itemsTotalValue = coffees.reduce((accumulator, currentValue) => {
     return accumulator + currentValue.price * currentValue.amount
   }, 0)
   const shipping = 3.5
   const total = itemsTotalValue + shipping
+
+  useEffect(() => {
+    if (coffees.length === 0) {
+      navigate('/')
+    }
+  }, [coffees.length, navigate])
 
   return (
     <Container>

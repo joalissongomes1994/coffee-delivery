@@ -35,7 +35,7 @@ export function CoffeeCard() {
             <span>{formatPrice(itemsTotalValue)}</span>
           </div>
           <div>
-            <span>Entrega</span>
+            <span title="O valor da entrega é fixado em R$ 3,50">Entrega</span>
             <span>{formatPrice(shipping)}</span>
           </div>
           <div className="total-amount-bold">

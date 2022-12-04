@@ -9,12 +9,6 @@ interface CoffeesState {
 export function coffeesReducer(state: CoffeesState, action: any): CoffeesState {
   switch (action.type) {
     case ActionTypes.ADD_COFFEE: {
-      const hasThisCoffee = state.coffees.findIndex(
-        (coffee) => coffee.id === action.payload.newCoffee.id,
-      )
-
-      if (!(hasThisCoffee < 0)) return state
-
       const newCoffeePayload = {
         ...action.payload.newCoffee,
         amount: action.payload.coffeeAmount,

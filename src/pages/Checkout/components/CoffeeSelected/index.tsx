@@ -1,10 +1,11 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
 import { useContext } from 'react'
-import { TCoffeeListData } from '../../../../coffeeList'
+import { coffeesList, TCoffeeListData } from '../../../../coffeeList'
 import { CounterButton } from '../../../../components/CounterButton'
 import { IconButton } from '../../../../components/IconButton'
 import { CoffeeContext } from '../../../../contexts/CoffeeContext'
 import { formatPrice } from '../../../../util/format'
+import { errorMessage, successMessage } from '../../../../util/toastMessages'
 import {
   Container,
   WrapperCounter,
@@ -24,6 +25,15 @@ export function CoffeeSelected({
     useContext(CoffeeContext)
 
   function handleCoffeesAmountIncrement() {
+    const hasThisAmountStock = coffeesList.findIndex(
+      (coffeeItem) => coffeeItem.id === id && coffeeItem.amount > amount,
+    )
+
+    if (hasThisAmountStock < 0)
+      return errorMessage(
+        `Só possuimos ${amount} unidades deste café no estoque`,
+      )
+
     coffeesAmountIncrement(id, amount)
   }
 
@@ -33,6 +43,7 @@ export function CoffeeSelected({
 
   function handleRomoveItem() {
     removeCoffee(id)
+    successMessage('Item removido do carrinho com sucesso!')
   }
 
   return (

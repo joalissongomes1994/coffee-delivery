@@ -10,10 +10,15 @@ import {
 
 import { formatPrice } from '../../../../util/format'
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
-import { TCoffeeListData } from '../../../../coffeeList'
+import { coffeesList, TCoffeeListData } from '../../../../coffeeList'
 import { useContext, useEffect, useState } from 'react'
 import { CoffeeContext } from '../../../../contexts/CoffeeContext'
 import { CounterButton } from '../../../../components/CounterButton'
+import {
+  errorMessage,
+  successMessage,
+  warnMessage,
+} from '../../../../util/toastMessages'
 
 interface CatalogCardProps {
   coffee: TCoffeeListData
@@ -39,11 +44,37 @@ export function CatalogCard({ coffee }: CatalogCardProps) {
     })
   }, [coffeeSelected, coffees])
 
-  function handleAddCoffee(coffee: TCoffeeListData) {
-    addCoffee(coffee, coffeeAmount)
+  function handleAddCoffee(coffeeSelected: TCoffeeListData) {
+    const hasThisCoffee = coffees.findIndex(
+      (coffee) => coffee.id === coffeeSelected.id,
+    )
+    const hasThisAmountStock = coffeesList.findIndex(
+      (coffee) =>
+        coffee.id === coffeeSelected.id && coffee.amount >= coffeeAmount,
+    )
+
+    if (hasThisAmountStock < 0)
+      return errorMessage('Quantidade insuficiente no estoque')
+
+    if (hasThisCoffee < 0) {
+      addCoffee(coffee, coffeeAmount)
+      successMessage('Item adicionado ao carrinho com sucesso!')
+    } else {
+      warnMessage('Este item já foi adicionado ao carrinho!')
+    }
   }
 
   function handleCoffeesAmountIncrement() {
+    const hasThisAmountStock = coffeesList.findIndex(
+      (coffeeItem) =>
+        coffeeItem.id === coffee.id && coffee.amount > coffeeAmount,
+    )
+
+    if (hasThisAmountStock < 0)
+      return errorMessage(
+        `Só possuimos ${coffee.amount} unidades deste café no estoque`,
+      )
+
     if (coffeeSelected < 0) return setCoffeeAmount((state) => state + 1)
 
     coffeesAmountIncrement(coffee.id, coffeeAmount)

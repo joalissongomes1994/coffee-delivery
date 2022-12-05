@@ -4,6 +4,8 @@ export const AddressContainer = styled.div`
   max-width: 40rem;
   display: flex;
   flex-direction: column;
+
+  width: 100%;
 `
 
 export const Subtitle = styled.h4`

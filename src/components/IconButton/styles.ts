@@ -36,6 +36,7 @@ export const IconButtonContainer = styled.button<IconButtonContainerProps>`
 
   span {
     width: 100%;
+    text-align: start;
   }
 
   &:hover {

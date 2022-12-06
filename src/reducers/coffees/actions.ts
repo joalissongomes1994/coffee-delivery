@@ -1,11 +1,23 @@
 import { TCoffeeListData } from "../../coffeeList"
+import { CheckoutFormData } from "../../pages/Checkout"
 
 
 export enum ActionTypes {
   'ADD_COFFEE'= 'ADD_COFFEE',
+  'RESET_COFFEE'= 'RESET_COFFEE',
+  'CREATE_CHECKOUT'= 'CREATE_CHECKOUT',
   'REMOVE_COFFEE'= 'REMOVE_COFFEE',
   'COFFEES_AMOUNT_INCREMENT'= 'COFFEES_AMOUNT_INCREMENT',
   'COFFEES_AMOUNT_DECREMENT'= 'COFFEES_AMOUNT_DECREMENT'
+}
+
+export function createCheckoutAction(checkoutData: CheckoutFormData) {
+  return {
+    type: ActionTypes.CREATE_CHECKOUT,
+    payload: {
+      checkoutData
+    }
+  }
 }
 
 export function addCoffeeAction(newCoffee: TCoffeeListData, coffeeAmount: number) {
@@ -15,6 +27,12 @@ export function addCoffeeAction(newCoffee: TCoffeeListData, coffeeAmount: number
       newCoffee,
       coffeeAmount
     }
+  }
+}
+
+export function resetCoffeeAction() {
+  return {
+    type: ActionTypes.RESET_COFFEE,
   }
 }
 

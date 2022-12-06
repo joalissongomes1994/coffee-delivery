@@ -1,7 +1,10 @@
 import { createContext, ReactNode, useEffect, useReducer } from 'react'
 import { TCoffeeListData } from '../coffeeList'
+import { CheckoutFormData } from '../pages/Checkout'
 import {
+  createCheckoutAction,
   addCoffeeAction,
+  resetCoffeeAction,
   coffeesAmountDecrementAction,
   coffeesAmountIncrementAction,
   removeCoffeeAction,
@@ -15,7 +18,10 @@ interface CoffeeContextProviderProps {
 interface CoffeeContextType {
   coffees: TCoffeeListData[]
   coffeeId: string | null
+  checkout: CheckoutFormData | null
+  createCheckout: (checkoutFormData: CheckoutFormData) => void
   addCoffee: (coffee: TCoffeeListData, coffeeAmount: number) => void
+  resetCoffee: () => void
   removeCoffee: (id: string) => void
   coffeesAmountIncrement: (id: string, amount: number) => void
   coffeesAmountDecrement: (id: string, amount: number) => void
@@ -31,6 +37,7 @@ export function CoffeeContextProvider({
     {
       coffees: [],
       coffeeId: null,
+      checkout: null,
     },
     () => {
       const stateStoredCheckoutAsJSON = localStorage.getItem(
@@ -39,10 +46,12 @@ export function CoffeeContextProvider({
 
       if (stateStoredCheckoutAsJSON)
         return JSON.parse(stateStoredCheckoutAsJSON)
+
+      return { coffees: [], coffeeId: null, checkout: null }
     },
   )
 
-  const { coffeeId, coffees } = coffeeState
+  const { coffeeId, coffees, checkout } = coffeeState
 
   useEffect(() => {
     const stateCheckoutJSON = JSON.stringify(coffeeState)
@@ -53,8 +62,16 @@ export function CoffeeContextProvider({
     )
   }, [coffeeState])
 
+  function createCheckout(checkoutFormData: CheckoutFormData) {
+    dispatch(createCheckoutAction(checkoutFormData))
+  }
+
   function addCoffee(coffee: TCoffeeListData, coffeeAmount: number) {
     dispatch(addCoffeeAction(coffee, coffeeAmount))
+  }
+
+  function resetCoffee() {
+    dispatch(resetCoffeeAction())
   }
 
   function removeCoffee(id: string) {
@@ -74,10 +91,13 @@ export function CoffeeContextProvider({
       value={{
         coffeeId,
         coffees,
+        checkout,
         addCoffee,
+        resetCoffee,
         removeCoffee,
         coffeesAmountIncrement,
         coffeesAmountDecrement,
+        createCheckout,
       }}
     >
       {children}

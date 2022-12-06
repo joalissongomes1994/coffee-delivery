@@ -1,13 +1,21 @@
 import { TCoffeeListData } from '../../coffeeList'
+import { CheckoutFormData } from '../../pages/Checkout'
 import { ActionTypes } from './actions'
 
 interface CoffeesState {
   coffees: TCoffeeListData[]
   coffeeId: string | null
+  checkout: CheckoutFormData
 }
 
 export function coffeesReducer(state: CoffeesState, action: any): CoffeesState {
   switch (action.type) {
+    case ActionTypes.CREATE_CHECKOUT: {
+      return {
+        ...state,
+        checkout: action.payload.checkoutData,
+      }
+    }
     case ActionTypes.ADD_COFFEE: {
       const newCoffeePayload = {
         ...action.payload.newCoffee,
@@ -17,6 +25,12 @@ export function coffeesReducer(state: CoffeesState, action: any): CoffeesState {
       return {
         ...state,
         coffees: [...state.coffees, newCoffeePayload],
+      }
+    }
+    case ActionTypes.RESET_COFFEE: {
+      return {
+        ...state,
+        coffees: [],
       }
     }
     case ActionTypes.REMOVE_COFFEE: {

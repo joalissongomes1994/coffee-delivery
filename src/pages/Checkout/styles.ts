@@ -10,10 +10,14 @@ export const CheckoutContainer = styled.form`
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+
+    max-width: 40rem;
+    flex: 2;
   }
 
   .wrapper-coffee-card-selected {
-    width: 100%;
+    max-width: 40rem;
+    flex: 1;
   }
 
   @media (max-width: 1024px) {

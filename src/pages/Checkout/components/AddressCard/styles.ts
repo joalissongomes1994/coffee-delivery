@@ -1,11 +1,9 @@
 import styled from 'styled-components'
 
 export const AddressContainer = styled.div`
-  max-width: 40rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
-
-  width: 100%;
 `
 
 export const Subtitle = styled.h4`

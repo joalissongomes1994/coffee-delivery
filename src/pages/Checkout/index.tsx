@@ -5,6 +5,10 @@ import { AddressCard } from './components/AddressCard'
 import { PaymentCard } from './components/PaymentCard'
 import { CoffeeCard } from './components/CoffeeCard'
 import { CheckoutContainer } from './styles'
+import { useContext } from 'react'
+import { CoffeeContext } from '../../contexts/CoffeeContext'
+import { successMessage } from '../../util/toastMessages'
+import { useNavigate } from 'react-router-dom'
 
 const checkoutFormValidationSchema = zod.object({
   address: zod.object({
@@ -42,9 +46,14 @@ export function Checkout() {
   })
 
   const { handleSubmit } = checkoutForm
+  const { createCheckout, resetCoffee } = useContext(CoffeeContext)
+  const navigate = useNavigate()
 
-  function handleCheckout(data: any) {
-    console.log(data)
+  function handleCheckout(data: CheckoutFormData) {
+    createCheckout(data)
+    resetCoffee()
+    navigate('/success')
+    successMessage('Pedido finalizado com sucesso!')
   }
 
   return (

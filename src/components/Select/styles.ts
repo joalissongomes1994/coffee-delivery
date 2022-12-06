@@ -10,4 +10,15 @@ export const SelectContainer = styled.select`
   font-weight: 400;
   font-size: 0.875rem;
   line-height: 1.3;
+
+  text-align: center;
+  cursor: pointer;
+
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+
+  span {
+    background-color: red;
+  }
 `

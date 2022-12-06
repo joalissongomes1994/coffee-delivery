@@ -81,5 +81,10 @@ export const InputWrapper = styled.div`
   }
   .federative-unit {
     grid-area: federative-unit;
+
+    select option {
+      background: rgba(0, 0, 0, 0.3);
+      color: red;
+    }
   }
 `

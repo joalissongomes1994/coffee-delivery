@@ -152,8 +152,10 @@ export function AddressCard() {
             <Select
               {...register('address.federativeUnit')}
               name="address.federativeUnit"
-              placeholder="UF"
             >
+              <option className="default-value" value="" disabled hidden>
+                UF
+              </option>
               {federativeUnit.map((item) => {
                 const federativeUnitSelected = Object.keys(item).toString()
                 return (

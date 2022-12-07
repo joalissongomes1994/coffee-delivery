@@ -42,6 +42,8 @@ Nesse desafio, foi disponibilizado o modelo do layout a ser seguido, para ser de
   <div align="center">
     <img width="240px" src="https://github.com/joalissongomes1994/coffee-delivery/blob/main/src/assets/screenshort-readme/screen-home-mobile-1.png">
     <img width="240px" src="https://github.com/joalissongomes1994/coffee-delivery/blob/main/src/assets/screenshort-readme/screen-home-mobile-2.png">
+  </div>
+  <div align="center">
     <img width="240px" src="https://github.com/joalissongomes1994/coffee-delivery/blob/main/src/assets/screenshort-readme/screen-checkout-mobile-1.png">
     <img width="240px" src="https://github.com/joalissongomes1994/coffee-delivery/blob/main/src/assets/screenshort-readme/screen-success-mobile-1.png">
   </div>
